@@ -1,35 +1,81 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import * as React from 'react';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Outlet } from 'react-router';
+import type { User } from 'firebase/auth';
+import { ReactRouterAppProvider } from '@toolpad/core/react-router';
+import type { Navigation, Authentication } from '@toolpad/core/AppProvider';
+import { firebaseSignOut, signInWithGoogle, onAuthStateChanged } from './firebase/auth';
+import SessionContext, { type Session } from './SessionContext';
 
-function App() {
-  const [count, setCount] = useState(0)
+const NAVIGATION: Navigation = [
+  {
+    kind: 'header',
+    title: 'Main items',
+  },
+  {
+    title: 'Dashboard',
+    icon: <DashboardIcon />,
+  },
+  {
+    segment: 'orders',
+    title: 'Orders',
+    icon: <ShoppingCartIcon />,
+  },
+];
+
+const BRANDING = {
+  title: 'My Toolpad Core App',
+};
+
+const AUTHENTICATION: Authentication = {
+  signIn: signInWithGoogle,
+  signOut: firebaseSignOut,
+};
+
+export default function App() {
+  const [session, setSession] = React.useState<Session | null>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  const sessionContextValue = React.useMemo(
+    () => ({
+      session,
+      setSession,
+      loading,
+    }),
+    [session, loading],
+  );
+
+  React.useEffect(() => {
+    // Returns an `unsubscribe` function to be called during teardown
+    const unsubscribe = onAuthStateChanged((user: User | null) => {
+      if (user) {
+        setSession({
+          user: {
+            name: user.displayName || '',
+            email: user.email || '',
+            image: user.photoURL || '',
+          },
+        });
+      } else {
+        setSession(null);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ReactRouterAppProvider
+      navigation={NAVIGATION}
+      branding={BRANDING}
+      session={session}
+      authentication={AUTHENTICATION}
+    >
+      <SessionContext.Provider value={sessionContextValue}>
+        <Outlet />
+      </SessionContext.Provider>
+    </ReactRouterAppProvider>
+  );
 }
-
-export default App
