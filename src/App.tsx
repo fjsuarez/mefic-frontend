@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { Outlet } from 'react-router';
 import type { User } from 'firebase/auth';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
@@ -22,6 +23,11 @@ const NAVIGATION: Navigation = [
     segment: 'stocks',
     title: 'Stocks',
     icon: <ShowChartIcon />,
+  },
+  {
+    segment: 'portfolio',
+    title: 'Portfolio Management',
+    icon: <AccountBalanceIcon />,
   },
 ];
 
