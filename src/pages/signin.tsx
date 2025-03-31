@@ -10,7 +10,7 @@ import { signInWithGoogle, signInWithGithub, signInWithCredentials } from '../fi
 function DemoInfo() {
   return (
     <Alert severity="info">
-      You can use <strong>toolpad-demo@mui.com</strong> with the password <strong>@demo1</strong> to
+      You can use <strong>demo@mefic.app</strong> with the password <strong>@demo1</strong> to
       test
     </Alert>
   );
@@ -76,7 +76,7 @@ export default function SignIn() {
       slots={{ subtitle: DemoInfo }}
       slotProps={{
         emailField: {
-          defaultValue: 'toolpad-demo@mui.com',
+          defaultValue: 'demo@mefic.app',
         },
         passwordField: {
           defaultValue: '@demo1',

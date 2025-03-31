@@ -1,12 +1,13 @@
 import * as React from 'react';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 import { Outlet } from 'react-router';
 import type { User } from 'firebase/auth';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import type { Navigation, Authentication } from '@toolpad/core/AppProvider';
 import { firebaseSignOut, signInWithGoogle, onAuthStateChanged } from './firebase/auth';
 import SessionContext, { type Session } from './SessionContext';
+import Logo from './assets/logo.webp';
 
 const NAVIGATION: Navigation = [
   {
@@ -18,14 +19,16 @@ const NAVIGATION: Navigation = [
     icon: <DashboardIcon />,
   },
   {
-    segment: 'orders',
-    title: 'Orders',
-    icon: <ShoppingCartIcon />,
+    segment: 'stocks',
+    title: 'Stocks',
+    icon: <ShowChartIcon />,
   },
 ];
 
 const BRANDING = {
-  title: 'My Toolpad Core App',
+  title: 'MEFIC App',
+  homeUrl: '/',
+  logo: (<img src={Logo} alt="MEFIC Logo" style={{ maxWidth: '100%' }} />),
 };
 
 const AUTHENTICATION: Authentication = {
