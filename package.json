@@ -7,12 +7,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "firebase": "^11",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6",
-    "@mui/material": "^6",
+    "@mui/material": "^6.4.9",
+    "@mui/x-charts": "^8.0.0-beta.2",
+    "@mui/x-date-pickers": "^8.0.0-beta.2",
     "@toolpad/core": "^0.12.0",
+    "date-fns": "^4.1.0",
+    "firebase": "^11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7"

@@ -5,6 +5,7 @@ import App from './App';
 import Layout from './layouts/dashboard';
 import DashboardPage from './pages';
 import StocksPage from './pages/stocks';
+import PortfolioPage from './pages/portfolio';
 import SignInPage from './pages/signin';
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
           {
             path: 'stocks',
             Component: StocksPage,
+          },
+          {
+            path: 'portfolio',
+            Component: PortfolioPage,
           },
         ],
       },
