@@ -8,6 +8,7 @@ import UserPortfolioList from '../components/UserPortfolioList';
 import PortfolioPerformance from '../components/PortfolioPerformance';
 import StockChart from '../components/StockChart';
 import { firebaseAuth } from '../firebase/firebaseConfig';
+import { buildApiUrl } from '../config/api';
 
 interface Stock {
   symbol: string;
@@ -35,7 +36,7 @@ export default function DashboardPage() {
           return;
         }
         
-        const response = await fetch('http://localhost:8000/user-portfolio/', {
+        const response = await fetch(buildApiUrl('/user-portfolio/'), {
           headers: {
             'Authorization': `Bearer ${token}`
           }

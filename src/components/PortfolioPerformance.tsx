@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import { firebaseAuth } from '../firebase/firebaseConfig';
-
+import { buildApiUrl } from '../config/api';
 interface PerformanceData {
   total_value: number;
   daily_change: number;
@@ -36,7 +36,7 @@ export default function PortfolioPerformance() {
           return;
         }
         
-        const response = await fetch(`http://localhost:8000/user-portfolio/performance`, {
+        const response = await fetch(buildApiUrl('/user-portfolio/performance'), {
           headers: {
             'Authorization': `Bearer ${token}`
           }

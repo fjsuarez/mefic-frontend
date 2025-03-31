@@ -8,6 +8,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { buildApiUrl } from '../config/api';
 
 interface StockChartProps {
   symbol: string;
@@ -37,7 +38,7 @@ export default function StockChart({ symbol }: StockChartProps) {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:8000/stocks/${symbol}/history?period=${period}`
+          buildApiUrl(`/stocks/${symbol}/history?period=${period}`)
         );
         
         if (!response.ok) {

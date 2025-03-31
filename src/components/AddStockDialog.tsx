@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { buildApiUrl } from '../config/api';
 
 interface Stock {
   symbol: string;
@@ -39,7 +40,7 @@ export default function AddStockDialog({ open, onClose, onAdd }: AddStockDialogP
     const fetchAvailableStocks = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:8000/stocks/available');
+        const response = await fetch(buildApiUrl('/stocks/available'));
         
         if (!response.ok) {
           throw new Error('Failed to fetch available stocks');

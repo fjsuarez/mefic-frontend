@@ -15,6 +15,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import AddStockDialog from '../components/AddStockDialog';
 import { firebaseAuth } from '../firebase/firebaseConfig';
+import { buildApiUrl } from '../config/api';
 
 interface Stock {
   symbol: string;
@@ -43,7 +44,7 @@ export default function PortfolioManagementPage() {
         throw new Error("You must be logged in");
       }
       
-      const response = await fetch('http://localhost:8000/user-portfolio/', {
+      const response = await fetch(buildApiUrl('/user-portfolio/'), {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -82,7 +83,7 @@ export default function PortfolioManagementPage() {
       // Calculate new allocations to maintain 100% total
       const updatedStocks = [...stocks, newStock];
       
-      const response = await fetch('http://localhost:8000/user-portfolio/', {
+      const response = await fetch(buildApiUrl('/user-portfolio/'), {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -119,7 +120,7 @@ export default function PortfolioManagementPage() {
         throw new Error("You must be logged in");
       }
       
-      const response = await fetch(`http://localhost:8000/user-portfolio/${symbol}`, {
+      const response = await fetch(buildApiUrl(`/user-portfolio/${symbol}`), {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

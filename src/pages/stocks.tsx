@@ -13,6 +13,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import StockChart from '../components/StockChart';
 import { firebaseAuth } from '../firebase/firebaseConfig';
+import { buildApiUrl } from '../config/api'; 
 
 // Create interfaces for the data
 interface StockFinancials {
@@ -88,7 +89,7 @@ export default function StocksPage() {
     // Fetch available stocks
     const fetchAvailableStocks = async () => {
       try {
-        const response = await fetch('http://localhost:8000/stocks/available');
+        const response = await fetch(buildApiUrl('/stocks/available'));
         if (!response.ok) {
           throw new Error('Failed to fetch available stocks');
         }
@@ -119,7 +120,7 @@ export default function StocksPage() {
       
       try {
         // Fetch financial metrics
-        const financialsResponse = await fetch(`http://localhost:8000/financial/metrics/${selectedStock}`);
+        const financialsResponse = await fetch(buildApiUrl(`/financial/metrics/${selectedStock}`));
         if (!financialsResponse.ok) {
           throw new Error('Failed to fetch financial metrics');
         }
@@ -127,7 +128,7 @@ export default function StocksPage() {
         setFinancials(financialsData);
         
         // Fetch technical indicators
-        const technicalsResponse = await fetch(`http://localhost:8000/technical/indicators/${selectedStock}`);
+        const technicalsResponse = await fetch(buildApiUrl(`/technical/indicators/${selectedStock}`));
         if (!technicalsResponse.ok) {
           throw new Error('Failed to fetch technical indicators');
         }
@@ -135,7 +136,7 @@ export default function StocksPage() {
         setTechnicals(technicalsData);
         
         // Fetch risk metrics
-        const riskResponse = await fetch(`http://localhost:8000/risk/metrics/${selectedStock}`);
+        const riskResponse = await fetch(buildApiUrl(`/risk/metrics/${selectedStock}`));
         if (!riskResponse.ok) {
           throw new Error('Failed to fetch risk metrics');
         }
