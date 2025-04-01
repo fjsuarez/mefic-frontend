@@ -7,6 +7,7 @@ import DashboardPage from './pages';
 import StocksPage from './pages/stocks';
 import PortfolioPage from './pages/portfolio';
 import SignInPage from './pages/signin';
+import ScreenerPage from './pages/screener';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
           {
             path: 'portfolio',
             Component: PortfolioPage,
+          },
+          {
+            path: 'screener',
+            Component: ScreenerPage,
           },
         ],
       },
